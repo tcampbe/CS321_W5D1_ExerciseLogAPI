@@ -10,6 +10,7 @@ using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using Microsoft.Extensions.Configuration;
+using System.Linq;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -30,7 +31,7 @@ namespace CS321_W5D1_ExerciseLogAPI.Controllers
         // POST api/values
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody]RegistrationModel registration)
-        {
+        { 
             // create a new domain user and email, name, etc
             var newUser = new User
             {

@@ -9,11 +9,11 @@ namespace CS321_W5D1_ExerciseLogAPI.Infrastructure.Data
     {
         public DbSet<ActivityType> ActivityTypes { get; set; }
         public DbSet<Activity> Activities { get; set; }
+        // NOTE that we don't have to define a Users DbSet. It is given to us by IdentityDbContext.
 
         // This method runs once when the DbContext is first used.
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            // TODO: use optionsBuilder to configure a Sqlite db
             optionsBuilder.UseSqlite("Data Source=../CS321_W5D1_ExerciseLogAPI.Infrastructure/ExerciseLog.db");
         }
 
