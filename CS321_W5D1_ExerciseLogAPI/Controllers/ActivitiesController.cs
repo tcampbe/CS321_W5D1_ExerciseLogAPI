@@ -50,7 +50,6 @@ namespace CS321_W5D1_ExerciseLogAPI.Controllers
         {
             try
             {
-
                 // add the new activity
                 _activityService.Add(activityModel.ToDomainModel());
             }

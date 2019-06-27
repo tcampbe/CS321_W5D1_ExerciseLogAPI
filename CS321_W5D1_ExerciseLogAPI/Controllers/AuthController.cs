@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using CS321_W5D1_ExerciseLogAPI.ApiModels;
 using CS321_W5D1_ExerciseLogAPI.Core.Models;
-using CS321_W5D1_ExerciseLogAPI.Infrastructure.Data;
 using Microsoft.AspNetCore.Authorization;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
@@ -64,10 +61,13 @@ namespace CS321_W5D1_ExerciseLogAPI.Controllers
         public async Task<IActionResult> Login([FromBody]LoginModel login)
         {
             IActionResult response = Unauthorized();
+            // try to authenticate user
             var user = await AuthenticateUserAsync(login.Email, login.Password);
 
+            // if we successfully authenticated...
             if (user != null)
             {
+                // generate and return the token
                 var tokenString = GenerateJSONWebToken(user);
                 response = Ok(new { token = tokenString });
             }
@@ -78,12 +78,16 @@ namespace CS321_W5D1_ExerciseLogAPI.Controllers
         private string GenerateJSONWebToken(User user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
+            // retrieve secret key from configuration
             var key = Encoding.ASCII.GetBytes(_config["Jwt:Key"]);
+            // create signing credentials using secrety key
             var credentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature);
+            // set up claims containing additional info that will be stored in token
             var claims = new Claim[]
             {
                 new Claim(JwtRegisteredClaimNames.Sub, user.Email),
             };
+            // create the token
             var token = new JwtSecurityToken(
                 claims: claims,
                 expires: DateTime.UtcNow.AddDays(7),
