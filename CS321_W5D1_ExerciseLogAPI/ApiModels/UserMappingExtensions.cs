@@ -13,9 +13,9 @@ namespace CS321_W5D1_ExerciseLogAPI.ApiModels
             return new UserModel
             {
                 Id = user.Id,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                Email = user.Email
+                //FirstName = user.FirstName,
+                //LastName = user.LastName,
+                //Email = user.Email
             };
         }
 
@@ -24,9 +24,9 @@ namespace CS321_W5D1_ExerciseLogAPI.ApiModels
             return new User
             {
                 Id = userModel.Id,
-                FirstName = userModel.FirstName,
-                LastName = userModel.LastName,
-                Email = userModel.Email
+                //FirstName = userModel.FirstName,
+                //LastName = userModel.LastName,
+                //Email = userModel.Email
             };
         }
 

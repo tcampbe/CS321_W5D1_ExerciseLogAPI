@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CS321_W5D1_ExerciseLogAPI.Infrastructure.Migrations
 {
-    public partial class Identity : Migration
+    public partial class Recreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -53,14 +53,24 @@ namespace CS321_W5D1_ExerciseLogAPI.Infrastructure.Migrations
                     TwoFactorEnabled = table.Column<bool>(nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
-                    AccessFailedCount = table.Column<int>(nullable: false),
-                    Discriminator = table.Column<string>(nullable: false),
+                    AccessFailedCount = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "User",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                    table.PrimaryKey("PK_User", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -82,36 +92,6 @@ namespace CS321_W5D1_ExerciseLogAPI.Infrastructure.Migrations
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Activities",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Date = table.Column<DateTime>(nullable: false),
-                    ActivityTypeId = table.Column<int>(nullable: false),
-                    Duration = table.Column<double>(nullable: false),
-                    Distance = table.Column<double>(nullable: false),
-                    UserId = table.Column<string>(nullable: true),
-                    Notes = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Activities", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Activities_ActivityTypes_ActivityTypeId",
-                        column: x => x.ActivityTypeId,
-                        principalTable: "ActivityTypes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Activities_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -199,6 +179,36 @@ namespace CS321_W5D1_ExerciseLogAPI.Infrastructure.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Activities",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Date = table.Column<DateTime>(nullable: false),
+                    ActivityTypeId = table.Column<int>(nullable: false),
+                    Duration = table.Column<double>(nullable: false),
+                    Distance = table.Column<double>(nullable: false),
+                    UserId = table.Column<string>(nullable: true),
+                    Notes = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Activities", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Activities_ActivityTypes_ActivityTypeId",
+                        column: x => x.ActivityTypeId,
+                        principalTable: "ActivityTypes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Activities_User_UserId",
+                        column: x => x.UserId,
+                        principalTable: "User",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.InsertData(
                 table: "ActivityTypes",
                 columns: new[] { "Id", "Name", "RecordType" },
@@ -213,6 +223,16 @@ namespace CS321_W5D1_ExerciseLogAPI.Infrastructure.Migrations
                 table: "ActivityTypes",
                 columns: new[] { "Id", "Name", "RecordType" },
                 values: new object[] { 3, "Walking", 1 });
+
+            migrationBuilder.InsertData(
+                table: "User",
+                columns: new[] { "Id", "FirstName", "LastName" },
+                values: new object[] { "123", "John", "Doe" });
+
+            migrationBuilder.InsertData(
+                table: "Activities",
+                columns: new[] { "Id", "ActivityTypeId", "Date", "Distance", "Duration", "Notes", "UserId" },
+                values: new object[] { 1, 1, new DateTime(2019, 6, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), 3.0, 30.0, "Hot!!!!", "123" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Activities_ActivityTypeId",
@@ -284,6 +304,9 @@ namespace CS321_W5D1_ExerciseLogAPI.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "ActivityTypes");
+
+            migrationBuilder.DropTable(
+                name: "User");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

@@ -30,14 +30,14 @@ namespace CS321_W5D1_ExerciseLogAPI.Infrastructure.Data
                 new ActivityType { Id = 3, Name = "Walking", RecordType = RecordType.DurationAndDistance }
             );
 
-            //modelBuilder.Entity<User>().HasData(
-            //    new User { Id = "", Name = "Test User" }
-            //);
+            builder.Entity<User>().HasData(
+                new User { Id = "123", FirstName = "John", LastName = "Doe" }
+            );
 
             // TODO: configure some seed data in the books table
-            //builder.Entity<Activity>().HasData(
-            //    new Activity { Id = 1, UserId = "1", ActivityTypeId = 1, Date = new DateTime(2019, 6, 19), Distance = 3, Duration = 30, Notes = "Hot!!!!"}
-            //);
+            builder.Entity<Activity>().HasData(
+                new Activity { Id = 1, UserId = "123", ActivityTypeId = 1, Date = new DateTime(2019, 6, 19), Distance = 3, Duration = 30, Notes = "Hot!!!!" }
+            );
 
         }
     }

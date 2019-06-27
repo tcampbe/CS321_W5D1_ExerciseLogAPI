@@ -40,6 +40,18 @@ namespace CS321_W5D1_ExerciseLogAPI.Infrastructure.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Activities");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ActivityTypeId = 1,
+                            Date = new DateTime(2019, 6, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Distance = 3.0,
+                            Duration = 30.0,
+                            Notes = "Hot!!!!",
+                            UserId = "123"
+                        });
                 });
 
             modelBuilder.Entity("CS321_W5D1_ExerciseLogAPI.Core.Models.ActivityType", b =>
@@ -73,6 +85,28 @@ namespace CS321_W5D1_ExerciseLogAPI.Infrastructure.Migrations
                             Id = 3,
                             Name = "Walking",
                             RecordType = 1
+                        });
+                });
+
+            modelBuilder.Entity("CS321_W5D1_ExerciseLogAPI.Core.Models.User", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("FirstName");
+
+                    b.Property<string>("LastName");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("User");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "123",
+                            FirstName = "John",
+                            LastName = "Doe"
                         });
                 });
 
@@ -128,9 +162,6 @@ namespace CS321_W5D1_ExerciseLogAPI.Infrastructure.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired();
-
                     b.Property<string>("Email")
                         .HasMaxLength(256);
 
@@ -169,8 +200,6 @@ namespace CS321_W5D1_ExerciseLogAPI.Infrastructure.Migrations
                         .HasName("UserNameIndex");
 
                     b.ToTable("AspNetUsers");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -236,17 +265,6 @@ namespace CS321_W5D1_ExerciseLogAPI.Infrastructure.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("CS321_W5D1_ExerciseLogAPI.Core.Models.User", b =>
-                {
-                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
-
-                    b.Property<string>("FirstName");
-
-                    b.Property<string>("LastName");
-
-                    b.HasDiscriminator().HasValue("User");
                 });
 
             modelBuilder.Entity("CS321_W5D1_ExerciseLogAPI.Core.Models.Activity", b =>

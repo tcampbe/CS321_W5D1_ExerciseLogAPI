@@ -1,22 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CS321_W5D1_ExerciseLogAPI.Core.Models;
-using CS321_W5D1_ExerciseLogAPI.Core.Services;
+﻿using CS321_W5D1_ExerciseLogAPI.Core.Services;
 using CS321_W5D1_ExerciseLogAPI.Infrastructure.Data;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
 
 namespace CS321_W5D1_ExerciseLogAPI
 {
@@ -35,26 +23,26 @@ namespace CS321_W5D1_ExerciseLogAPI
             services.AddDbContext<AppDbContext>();
 
             // Add Identity services
-            services.AddIdentity<User, IdentityRole>()
-                .AddEntityFrameworkStores<AppDbContext>();
+            //services.AddIdentity<User, IdentityRole>()
+            //    .AddEntityFrameworkStores<AppDbContext>();
 
             // Add JWT support
-            services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-            .AddJwtBearer(options =>
-            {
-                options.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuer = false,
-                    ValidateAudience = false,
-                    ValidateLifetime = true,
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
-                };
-            });
+            //services.AddAuthentication(options =>
+            //{
+            //    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            //    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            //})
+            //.AddJwtBearer(options =>
+            //{
+            //    options.TokenValidationParameters = new TokenValidationParameters
+            //    {
+            //        ValidateIssuer = false,
+            //        ValidateAudience = false,
+            //        ValidateLifetime = true,
+            //        ValidateIssuerSigningKey = true,
+            //        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
+            //    };
+            //});
 
 
             services.AddScoped<IActivityRepository, ActivityRepository>();
@@ -80,7 +68,7 @@ namespace CS321_W5D1_ExerciseLogAPI
 
             app.UseHttpsRedirection();
 
-            app.UseAuthentication();
+            //app.UseAuthentication();
             app.UseMvc();
         }
     }
