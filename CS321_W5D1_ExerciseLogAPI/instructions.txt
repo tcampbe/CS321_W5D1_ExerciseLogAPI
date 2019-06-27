@@ -11,18 +11,23 @@
    ```csharp
       public class AppDbContext : IdentityDbContext
    ```
-   1. Remove the Users property since it will be inherited from IdentityDbContext.
-1. Create intial migration and update database.
+   1. Resolve namespace issues.
 1. In Startup ConfigureServices, add Identity services.
    ```csharp
             services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<AppDbContext>(); 
     ```
+1. Create intial migration and update database.
+   1. Look at db in db browser. Note the AspNet tables.
+
+
+
+
 1. In Startup Configure, add authentication middleware. Place this line immediately before UseMvc().
    ```csharp
          app.UseAuthentication(); 
    ```
-1. Add a new ApiModel called RegistrationModel. This will hold information about new user registrations.
+1. Note that there is a new ApiModel called RegistrationModel. This will hold information about new user registrations.
    ```csharp
     public class RegistrationModel
     {
