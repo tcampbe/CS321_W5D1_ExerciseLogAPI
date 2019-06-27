@@ -1,11 +1,10 @@
 ﻿using System;
 using CS321_W5D1_ExerciseLogAPI.Core.Models;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace CS321_W5D1_ExerciseLogAPI.Infrastructure.Data
 {
-    public class AppDbContext : IdentityDbContext
+    public class AppDbContext : DbContext
     {
         public DbSet<ActivityType> ActivityTypes { get; set; }
         public DbSet<Activity> Activities { get; set; }
