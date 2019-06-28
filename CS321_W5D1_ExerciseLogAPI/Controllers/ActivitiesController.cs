@@ -23,13 +23,20 @@ namespace CS321_W5D1_ExerciseLogAPI.Controllers
             _activityService = activitieservice;
         }
 
+        private string CurrentUserId
+        {
+            get
+            {
+                return User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            }
+        }
+
         // GET api/activities
         [HttpGet]
         public IActionResult Get()
         {
-            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var activityModels = _activityService
-                .GetAll(userId)
+                .GetAll(CurrentUserId)
                 .ToApiModels(); // convert activities to ActivityModels
 
             return Ok(activityModels);
@@ -50,6 +57,15 @@ namespace CS321_W5D1_ExerciseLogAPI.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] ActivityModel activityModel)
         {
+            // Overwrite userId with currentuser... they can only add for themselves
+            activityModel.UserId = CurrentUserId;
+            // OR... check userId and return BadRequest()
+            //if (activityModel.UserId != CurrentUserId)
+            //{
+            //    ModelState.AddModelError("UserId", "You can only add activities for yourself.");
+            //    return BadRequest(ModelState);
+            //}
+
             try
             {
                 // add the new activity
@@ -68,8 +84,15 @@ namespace CS321_W5D1_ExerciseLogAPI.Controllers
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] ActivityModel updatedActivity)
         {
+            if (updatedActivity.UserId != CurrentUserId)
+            {
+                ModelState.AddModelError("UserId", "You can only update your own activities.");
+                return BadRequest(ModelState);
+            }
+
             var activity = _activityService.Update(updatedActivity.ToDomainModel());
             if (activity == null) return NotFound();
+
             return Ok(activity.ToApiModel());
         }
 
@@ -78,6 +101,11 @@ namespace CS321_W5D1_ExerciseLogAPI.Controllers
         public IActionResult Delete(int id)
         {
             var activity = _activityService.Get(id);
+            if (activity.UserId != CurrentUserId)
+            {
+                ModelState.AddModelError("UserId", "You can only delete your own activities.");
+                return BadRequest(ModelState);
+            }
             if (activity == null) return NotFound();
             _activityService.Remove(activity);
             return NoContent();
