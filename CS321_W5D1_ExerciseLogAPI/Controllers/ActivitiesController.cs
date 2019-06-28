@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using CS321_W5D1_ExerciseLogAPI.ApiModels;
 using CS321_W5D1_ExerciseLogAPI.Core.Services;
@@ -26,8 +27,9 @@ namespace CS321_W5D1_ExerciseLogAPI.Controllers
         [HttpGet]
         public IActionResult Get()
         {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var activityModels = _activityService
-                .GetAll()
+                .GetAll(userId)
                 .ToApiModels(); // convert activities to ActivityModels
 
             return Ok(activityModels);

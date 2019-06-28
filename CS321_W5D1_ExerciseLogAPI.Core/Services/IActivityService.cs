@@ -7,7 +7,7 @@ namespace CS321_W5D1_ExerciseLogAPI.Core.Services
     {
         Activity Add(Activity Activity);
         Activity Get(int id);
-        IEnumerable<Activity> GetAll();
+        IEnumerable<Activity> GetAll(string userId);
         void Remove(Activity Activity);
         Activity Update(Activity updatedActivity);
     }

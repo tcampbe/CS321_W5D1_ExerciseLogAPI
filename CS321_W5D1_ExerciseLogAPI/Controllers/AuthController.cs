@@ -31,7 +31,7 @@ namespace CS321_W5D1_ExerciseLogAPI.Controllers
         // POST api/values
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody]RegistrationModel registration)
-        { 
+        {
             // create a new domain user and email, name, etc
             var newUser = new User
             {
@@ -86,8 +86,9 @@ namespace CS321_W5D1_ExerciseLogAPI.Controllers
             // set up claims containing additional info that will be stored in token
             var claims = new Claim[]
             {
-                new Claim(JwtRegisteredClaimNames.Sub, user.Email),
-            };
+                new Claim(JwtRegisteredClaimNames.Sub, user.Id),
+                new Claim(JwtRegisteredClaimNames.Email, user.Email)
+             };
             // create the token
             var token = new JwtSecurityToken(
                 claims: claims,

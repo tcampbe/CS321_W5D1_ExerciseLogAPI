@@ -31,11 +31,12 @@ namespace CS321_W5D1_ExerciseLogAPI.Infrastructure.Data
                 .SingleOrDefault(b => b.Id == id);
         }
 
-        public IEnumerable<Activity> GetAll()
+        public IEnumerable<Activity> GetAll(string userId)
         {
             return _dbContext.Activities
                 .Include(a => a.ActivityType)
                 .Include(a => a.User)
+                .Where(a => a.UserId == userId)
                 .ToList();
         }
 

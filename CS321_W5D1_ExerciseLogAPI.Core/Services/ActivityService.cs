@@ -35,10 +35,10 @@ namespace CS321_W5D1_ExerciseLogAPI.Core.Services
             return _activityRepo.Get(id);
         }
 
-        public IEnumerable<Activity> GetAll()
+        public IEnumerable<Activity> GetAll(string userId)
         {
             // TODO: return all Activitys using ToList()
-            return _activityRepo.GetAll();
+            return _activityRepo.GetAll(userId);
         }
 
         public Activity Update(Activity updatedActivity)
