@@ -34,28 +34,9 @@ namespace CS321_W5D1_ExerciseLogAPI
         {
             services.AddDbContext<AppDbContext>();
 
-            // Add Identity services
-            services.AddIdentity<User, IdentityRole>()
-                .AddEntityFrameworkStores<AppDbContext>();
+            // TODO: Add Identity services
 
-            // Add JWT support
-            services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-            .AddJwtBearer(options =>
-            {
-                options.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuer = false,
-                    ValidateAudience = false,
-                    ValidateLifetime = true,
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
-                };
-            });
-
+            // TODO: Add JWT support
 
             services.AddScoped<IActivityRepository, ActivityRepository>();
             services.AddScoped<IActivityService, ActivityService>();
@@ -80,7 +61,7 @@ namespace CS321_W5D1_ExerciseLogAPI
 
             app.UseHttpsRedirection();
 
-            app.UseAuthentication();
+            // TODO: Add Auth
             app.UseMvc();
         }
     }
