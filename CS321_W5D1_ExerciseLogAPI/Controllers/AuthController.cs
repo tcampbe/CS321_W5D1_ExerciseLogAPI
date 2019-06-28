@@ -47,7 +47,7 @@ namespace CS321_W5D1_ExerciseLogAPI.Controllers
             var result = await _userManager.CreateAsync(newUser, registration.Password);
             if (result.Succeeded)
             {
-                return Ok();
+                return Ok(newUser.ToApiModel());
             }
             foreach (var error in result.Errors)
             {
