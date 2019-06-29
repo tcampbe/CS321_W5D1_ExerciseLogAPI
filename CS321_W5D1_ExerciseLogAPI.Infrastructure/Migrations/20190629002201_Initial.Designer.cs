@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CS321_W5D1_ExerciseLogAPI.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20190626024244_Identity")]
-    partial class Identity
+    [Migration("20190629002201_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -99,6 +99,15 @@ namespace CS321_W5D1_ExerciseLogAPI.Infrastructure.Migrations
                         .HasName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "6dec595d-033a-482a-91c0-177b6f8be0d0",
+                            ConcurrencyStamp = "676cdea7-294f-478f-83ab-ddd63f034036",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

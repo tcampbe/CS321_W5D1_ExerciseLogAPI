@@ -49,6 +49,11 @@ namespace CS321_W5D1_ExerciseLogAPI.Controllers
         {
             var activity = _activityService.Get(id);
             if (activity == null) return NotFound();
+            if (activity.UserId != CurrentUserId && !User.IsInRole("Admin"))
+            {
+                ModelState.AddModelError("UserId", "You can only add activities for yourself.");
+                return BadRequest(ModelState);
+            }
             return Ok(activity.ToApiModel());
         }
 

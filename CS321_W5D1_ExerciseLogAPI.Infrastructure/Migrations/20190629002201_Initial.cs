@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CS321_W5D1_ExerciseLogAPI.Infrastructure.Migrations
 {
-    public partial class Identity : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -213,6 +213,11 @@ namespace CS321_W5D1_ExerciseLogAPI.Infrastructure.Migrations
                 table: "ActivityTypes",
                 columns: new[] { "Id", "Name", "RecordType" },
                 values: new object[] { 3, "Walking", 1 });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[] { "6dec595d-033a-482a-91c0-177b6f8be0d0", "676cdea7-294f-478f-83ab-ddd63f034036", "Admin", "ADMIN" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Activities_ActivityTypeId",

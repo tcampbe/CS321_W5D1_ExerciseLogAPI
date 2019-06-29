@@ -66,7 +66,7 @@ namespace CS321_W5D1_ExerciseLogAPI
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, UserManager<User> userManager)
         {
             if (env.IsDevelopment())
             {
@@ -82,6 +82,27 @@ namespace CS321_W5D1_ExerciseLogAPI
 
             app.UseAuthentication();
             app.UseMvc();
+
+            SeedUsers(userManager);
+        }
+
+        private void SeedUsers(UserManager<User> userManager)
+        {
+            if (userManager.FindByNameAsync("admin").Result == null)
+            {
+                User user = new User
+                {
+                    UserName = "admin",
+                    Email = "admin@test.com"
+                };
+
+                IdentityResult result = userManager.CreateAsync(user, "AdminPassword123!").Result;
+
+                if (result.Succeeded)
+                {
+                    userManager.AddToRoleAsync(user, "Admin").Wait();
+                }
+            }
         }
     }
 }

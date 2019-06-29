@@ -11,6 +11,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using Microsoft.Extensions.Configuration;
 using System.Linq;
+using System.Collections.Generic;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -83,12 +84,15 @@ namespace CS321_W5D1_ExerciseLogAPI.Controllers
             var key = Encoding.ASCII.GetBytes(_config["Jwt:Key"]);
             // create signing credentials using secrety key
             var credentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature);
+            var roles = _userManager.GetRolesAsync(user).Result;
             // set up claims containing additional info that will be stored in token
-            var claims = new Claim[]
+            var claims = new List<Claim>
             {
                 new Claim(JwtRegisteredClaimNames.Sub, user.Id),
                 new Claim(JwtRegisteredClaimNames.Email, user.Email)
              };
+            // add role claims
+            claims.AddRange(roles.Select(r => new Claim(ClaimTypes.Role, r)));
             // create the token
             var token = new JwtSecurityToken(
                 claims: claims,

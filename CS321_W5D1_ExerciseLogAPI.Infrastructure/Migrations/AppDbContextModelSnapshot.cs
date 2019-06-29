@@ -97,6 +97,15 @@ namespace CS321_W5D1_ExerciseLogAPI.Infrastructure.Migrations
                         .HasName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "6dec595d-033a-482a-91c0-177b6f8be0d0",
+                            ConcurrencyStamp = "676cdea7-294f-478f-83ab-ddd63f034036",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
