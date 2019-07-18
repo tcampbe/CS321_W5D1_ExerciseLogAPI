@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CS321_W5D1_ExerciseLogAPI.Infrastructure.Data
 {
+    // TODO: inherit from IdentityDbContext
     public class AppDbContext : DbContext
     {
         public DbSet<ActivityType> ActivityTypes { get; set; }
