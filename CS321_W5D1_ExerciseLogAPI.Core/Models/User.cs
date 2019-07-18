@@ -1,6 +1,7 @@
 ﻿
 namespace CS321_W5D1_ExerciseLogAPI.Core.Models
 {
+    // TODO: inherit from IdentityUser
     public class User 
     {
         public string Id { get; set; }

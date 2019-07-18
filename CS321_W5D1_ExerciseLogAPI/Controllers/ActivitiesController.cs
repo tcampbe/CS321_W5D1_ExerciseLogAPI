@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CS321_W5D1_ExerciseLogAPI.Controllers
 {
+    // TODO: Part2: Add authorization
     [Route("api/[controller]")]
     public class ActivitiesController : Controller
     {

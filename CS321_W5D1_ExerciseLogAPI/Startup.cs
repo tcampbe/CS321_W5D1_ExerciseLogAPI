@@ -1,22 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CS321_W5D1_ExerciseLogAPI.Core.Models;
-using CS321_W5D1_ExerciseLogAPI.Core.Services;
+﻿using CS321_W5D1_ExerciseLogAPI.Core.Services;
 using CS321_W5D1_ExerciseLogAPI.Infrastructure.Data;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
 
 namespace CS321_W5D1_ExerciseLogAPI
 {
@@ -34,7 +22,9 @@ namespace CS321_W5D1_ExerciseLogAPI
         {
             services.AddDbContext<AppDbContext>();
 
-            // TODO: Add Identity services
+            // TODO: Add Identity services (Part 1 of prep exercise)
+
+            // TODO: Add JWT support (Part 2 of prep exercise)
 
             // TODO: Add JWT support
 
@@ -61,7 +51,8 @@ namespace CS321_W5D1_ExerciseLogAPI
 
             app.UseHttpsRedirection();
 
-            // TODO: Add Auth
+            // TODO: Use authentication (Part 1 of prep exercise)
+
             app.UseMvc();
         }
     }
