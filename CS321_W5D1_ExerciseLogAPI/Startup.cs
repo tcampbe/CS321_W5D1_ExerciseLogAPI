@@ -22,11 +22,9 @@ namespace CS321_W5D1_ExerciseLogAPI
         {
             services.AddDbContext<AppDbContext>();
 
-            // TODO: Add Identity services (Part 1 of prep exercise)
+            // TODO: Prep Part 1: Add Identity services (Part 1 of prep exercise)
 
-            // TODO: Add JWT support (Part 2 of prep exercise)
-
-            // TODO: Add JWT support
+            // TODO: Prep Part 2: Add JWT support 
 
             services.AddScoped<IActivityRepository, ActivityRepository>();
             services.AddScoped<IActivityService, ActivityService>();
@@ -36,6 +34,7 @@ namespace CS321_W5D1_ExerciseLogAPI
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
+        // TODO: Class Project: Seed admin user
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
@@ -51,9 +50,11 @@ namespace CS321_W5D1_ExerciseLogAPI
 
             app.UseHttpsRedirection();
 
-            // TODO: Use authentication (Part 1 of prep exercise)
+            // TODO: Prep Part 1: Use authentication 
 
             app.UseMvc();
         }
+
+
     }
 }

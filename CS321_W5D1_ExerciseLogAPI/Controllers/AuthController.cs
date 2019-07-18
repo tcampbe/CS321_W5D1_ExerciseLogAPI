@@ -11,12 +11,13 @@ namespace CS321_W5D1_ExerciseLogAPI.Controllers
     {
         private readonly UserManager<User> _userManager;
 
-        // TODO: Part 1: add constructor and inject UserManager (Part 1 of Prep exercise)
-        // TODO: Part 2: add IConfiguration to the constructor
+        // TODO: Prep Part 1: add constructor and inject UserManager 
 
-        // TODO: Part 1: Add a Registration Action (Part 1 of Prep exercise)
+        // TODO: Prep Part 2: inject IConfiguration in the constructor
 
-        // TODO: Part 2: Add a login action (Part 2 of Prep exercise)
+        // TODO: Prep Part 1: Add a Registration Action (Part 1 of Prep exercise)
+
+        // TODO: Prep Part 2: Add a login action (Part 2 of Prep exercise)
 
     }
 }

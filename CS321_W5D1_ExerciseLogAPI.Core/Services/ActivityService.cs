@@ -54,6 +54,8 @@ namespace CS321_W5D1_ExerciseLogAPI.Core.Services
             _activityRepo.Remove(Activity);
         }
 
+        // TODO: Class Project: Add GetAllForUser() method
+
     }
 
 }

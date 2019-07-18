@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CS321_W5D1_ExerciseLogAPI.Controllers
 {
-    // TODO: Part2: Add authorization
+    // TODO: Prep Part 2: Add authorization
     [Route("api/[controller]")]
     public class ActivitiesController : Controller
     {
@@ -22,10 +22,13 @@ namespace CS321_W5D1_ExerciseLogAPI.Controllers
             _activityService = activitieservice;
         }
 
+        // TODO: Class Project: Add CurrentUserId property
+
         // GET api/activities
         [HttpGet]
         public IActionResult Get()
         {
+            // TODO: Class Project: Only return users data, unless Admin
             var activityModels = _activityService
                 .GetAll()
                 .ToApiModels(); // convert activities to ActivityModels
@@ -38,6 +41,7 @@ namespace CS321_W5D1_ExerciseLogAPI.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
+            // TODO: Class Project: Only return users data, unless Admin
             var activity = _activityService.Get(id);
             if (activity == null) return NotFound();
             return Ok(activity.ToApiModel());
@@ -80,5 +84,7 @@ namespace CS321_W5D1_ExerciseLogAPI.Controllers
             _activityService.Remove(activity);
             return NoContent();
         }
+
+        // TODO: Class Project: Add new Delete route
     }
 }

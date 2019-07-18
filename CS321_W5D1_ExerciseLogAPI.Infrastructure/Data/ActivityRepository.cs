@@ -68,5 +68,7 @@ namespace CS321_W5D1_ExerciseLogAPI.Infrastructure.Data
             _dbContext.Activities.Remove(Activity);
             _dbContext.SaveChanges();
         }
+
+        // TODO: Class Project: Add GetAllForUser() method
     }
 }
